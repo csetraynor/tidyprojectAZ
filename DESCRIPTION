@@ -1,12 +1,18 @@
 Package: tidyprojectAZ
 Type: Package
-Title: What the Package Does (Title Case)
+Title: AZ wrapper around tidyproject
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R: person("Tarj", "Sahota", email =
+    "tarjinder.sahota@astrazeneca.com", role = c("aut", "cre"))
+Maintainer: Tarj Sahota <tarjinder.sahota@astrazeneca.com>
+Description: Create and manage standardised analysis directories with
+    private package libraries and links to external code repositories.
+License: GPL-3 | file LICENSE
 Encoding: UTF-8
 LazyData: true
-Suggests: testthat
+Remotes: tsahota/tidyproject
+Imports:
+    tidyproject
+Suggests:
+    testthat
+RoxygenNote: 6.0.1
