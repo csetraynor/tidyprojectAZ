@@ -5,7 +5,7 @@
 \title{Create new R script}
 \usage{
 new_script(name, overwrite = FALSE, open_file = TRUE,
-  libs = c("NMprojectAZ"))
+  libs = c("tidyprojectAZ"))
 }
 \arguments{
 \item{name}{character indicating name of script to create}

@@ -4,16 +4,16 @@
 \alias{make_project}
 \title{Create new_project}
 \usage{
-make_project(proj_name, remove_user_lib = FALSE, type, name)
+make_project(proj_name, remove_user_lib = FALSE, overwrite_rprofile = FALSE,
+  type, name)
 }
 \arguments{
-\item{proj_name}{character string of full path to new_project.
-Should be path to analysis directory
-UNLESS starting a new analysis in QCP KM directory
- then proj_name should be directory of drug project and type and name should be specified.}
+\item{proj_name}{character string of full path to new_project}
 
 \item{remove_user_lib}{logical (default=FALSE) if TRUE will attempt to remove
 user R package library from .libPaths()}
+
+\item{overwrite_rprofile}{logical. should project .Rprofile be overwritten (default=FALSE)}
 
 \item{type}{character. type argument for QCP knowledge management}
 
