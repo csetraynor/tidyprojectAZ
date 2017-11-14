@@ -78,7 +78,7 @@ new_script <- function(name, overwrite = FALSE, open_file = TRUE, libs=c("tidypr
 make_project <- function(proj_name, remove_user_lib = FALSE,
                          overwrite_rprofile = FALSE, type, name) {
   in_qcp_km <- grepl("^/projects/QCP_MODELING",normalizePath(proj_name,winslash = "/",mustWork = FALSE))
-  is_qcp_project_dir <- grepl("^/projects/QCP_MODELING/[^/]+/[^/]+$",normalizePath(proj_name,winslash = "/",mustWork = FALSE))
+  is_qcp_project_dir <- grepl("^/projects/QCP_MODELING/[^/]+/[^/]+/*$",normalizePath(proj_name,winslash = "/",mustWork = FALSE))
   if(in_qcp_km & !is_qcp_project_dir)
     if(!tidyproject::check_if_tidyproject(proj_name))
       stop("proj_name, when pointing to KM server, should either be:",
@@ -86,7 +86,13 @@ make_project <- function(proj_name, remove_user_lib = FALSE,
            "\n  an existing activity created with the QCP KM scripts",call. = FALSE)
   if(is_qcp_project_dir){
     if(missing(type)|missing(name))
-      stop("new activites on KM server need \"type\" and \"name\" arguments specified",call. = FALSE)
+      stop("new activites on KM server need \"type\" and \"name\" arguments in line with KM process.
+e.g. make_project(\"path/to/project\", type=\"poppk\", name=\"DXXXXXXXX\")
+See KM business process documentation for more information",call. = FALSE)
+    if(type %in% ""|name %in% "")
+      stop("new activites on KM server need NON-BLANK \"type\" and \"name\" arguments in line with KM process.
+e.g. make_project(\"path/to/project\", type=\"poppk\", name=\"DXXXXXXXX\")
+See KM business process documentation for more information",call. = FALSE)
     run_in <- normalizePath(proj_name,winslash = "/",mustWork = TRUE)
     message("Launching up QCP knowledge management scripts")
     currentwd <- getwd() ; setwd(run_in) ; on.exit(setwd(currentwd))
