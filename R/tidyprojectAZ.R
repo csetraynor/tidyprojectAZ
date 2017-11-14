@@ -85,26 +85,27 @@ make_project <- function(proj_name, remove_user_lib = FALSE,
            "\n  a drug project dir (i.e. /project/QCP_MODELING/[TA]/[PROJECT]) OR",
            "\n  an existing activity created with the QCP KM scripts",call. = FALSE)
   if(in_qcp_km & !file.exists(normalizePath(proj_name,winslash = "/",mustWork = FALSE)))
-    stop("Project does not exist and can only be created by a QCP super user
+    stop("Drug project directory does not exist and can only be created by a QCP super user:
 (as of 14/11/2017 - Robert Palmer,
                     Jacob Leander,
-                    Robert Fox or
+                    Robert Fox,
                     Nidal Al-Huniti,
                     Martin Johnson,
                     Tarj Sahota)
-and ask them to create the project for you.
-For more info ask consult KM business process documentation (on QCP documentation server)",call.=FALSE)
+Contact someone here and ask them to create the project for your compound.
+This needs to be done before creating an analysis project.
+For more info consult KM business process documentation",call.=FALSE)
   if(is_qcp_project_dir){
     if(missing(type)|missing(name))
       stop("new activites on KM server need \"type\" and \"name\" arguments in line with KM process.
-e.g. make_project(\"path/to/project\", type=\"poppk\", name=\"DXXXXXXXX\")
-See KM business process documentation for more information",call. = FALSE)
+e.g. make_project(\"/project/QCP_MODELING/[TA]/[PROJECT]\", type=\"poppk\", name=\"DXXXXXXXX\")
+For more info consult KM business process documentation",call. = FALSE)
     if(type %in% ""|name %in% "")
       stop("new activites on KM server need NON-BLANK \"type\" and \"name\" arguments in line with KM process.
 e.g. make_project(\"path/to/project\", type=\"poppk\", name=\"DXXXXXXXX\")
-See KM business process documentation for more information",call. = FALSE)
+For more info consult KM business process documentation",call. = FALSE)
     run_in <- normalizePath(proj_name,winslash = "/",mustWork = TRUE)
-    message("Launching up QCP knowledge management scripts")
+    message("Launching QCP knowledge management script: /home/qcpadmin/bin/create_activity")
     currentwd <- getwd() ; setwd(run_in) ; on.exit(setwd(currentwd))
     system(paste("/home/qcpadmin/bin/create_activity",type,name))
     parent_dir <- dir(run_in, full.names = TRUE)
@@ -113,7 +114,7 @@ See KM business process documentation for more information",call. = FALSE)
       stop("Something wrong. QCP KM scripts failed to create activity.",
            "\n  Revert to command line KM process",call. = FALSE)
     proj_name <- normalizePath(proj_name,winslash = "/",mustWork = TRUE)
-    message("Making tidyproject...")
+    message("Converting to tidyproject...")
   }
   tidyproject::make_project(proj_name=proj_name, remove_user_lib = remove_user_lib,
                             overwrite_rprofile = overwrite_rprofile)
