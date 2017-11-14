@@ -84,6 +84,16 @@ make_project <- function(proj_name, remove_user_lib = FALSE,
       stop("proj_name, when pointing to KM server, should either be:",
            "\n  a drug project dir (i.e. /project/QCP_MODELING/[TA]/[PROJECT]) OR",
            "\n  an existing activity created with the QCP KM scripts",call. = FALSE)
+  if(in_qcp_km & !file.exists(normalizePath(proj_name,winslash = "/",mustWork = FALSE)))
+    stop("Project does not exist and can only be created by a QCP super user
+(as of 14/11/2017 - Robert Palmer,
+                    Jacob Leander,
+                    Robert Fox or
+                    Nidal Al-Huniti,
+                    Martin Johnson,
+                    Tarj Sahota)
+and ask them to create the project for you.
+For more info ask consult KM business process documentation (on QCP documentation server)",call.=FALSE)
   if(is_qcp_project_dir){
     if(missing(type)|missing(name))
       stop("new activites on KM server need \"type\" and \"name\" arguments in line with KM process.
